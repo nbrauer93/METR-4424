@@ -6,7 +6,7 @@ Created on Tue Aug 20 13:58:19 2019
 @author: noahbrauer
 """
 
-############# Source code is courtesy of MetPy; Modifications made by Noah Brauer
+############# Isentropic coordinate function is courtesy of MetPy#####################
 
 
 import cartopy.crs as ccrs
