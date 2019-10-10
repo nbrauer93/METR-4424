@@ -6,7 +6,7 @@ Created on Tue Aug 20 13:58:19 2019
 @author: noahbrauer
 """
 
-############# Isentropic coordinate function is courtesy of MetPy#####################
+############# Isentropic coordinate function is courtesy of MetPy #############
 
 
 import cartopy.crs as ccrs
