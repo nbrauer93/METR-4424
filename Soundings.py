@@ -23,11 +23,11 @@ from mpl_toolkits.axes_grid1.inset_locator import inset_axes
 
 
 # Enter the date of your all-star sounding here (yyyy,m,dd,hh)
-date = datetime(2017, 8, 28, 00)
+date = datetime(2017, 8, 26, 00)
 
 #Enter the station here:
 
-station = 'LCH'
+station = 'CRP'
 
 ####################################################
 # Make the request (a pandas dataframe is returned). This fetches your All-Star Sounding from the University of Wyoming sounding archives
@@ -115,7 +115,7 @@ plt.ylabel('')
 #plt.ylabel('hPa', size = 44)
 plt.xticks(fontsize = 18)
 plt.yticks(fontsize = 18)
-plt.title('2017082800Z', size = 44)
+plt.title('KCRP 2017082600Z', size = 44)
 
 
 ##If applicable, you can add a hodograph (say, if you have a severe wx sounding); If not, comment out
@@ -125,7 +125,7 @@ h = Hodograph(ax_hod, component_range=80.) #Change range in windspeeds
 h.add_grid(increment=20)
 h.plot_colormapped(u, v, wind_speed)
 '''
-plt.savefig('/Users/noahbrauer/Desktop/Paper_Figures_Single/lch2800Z.png')
+plt.savefig('/Users/noahbrauer/Desktop/Paper_Figures_Single/crp2600Z.png')
 
 # Show the plot
 plt.show()
