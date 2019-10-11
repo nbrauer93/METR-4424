@@ -159,7 +159,7 @@ crs = ccrs.LambertConformal(central_longitude=-100.0, central_latitude=45.0)
 # Coordinates to limit map area
 bounds = [(-120., -75., 25., 50.)]
 # Choose a level to plot, in this case 296 K
-level = 0
+level = 296
 
 #Can tweak figure size if you would like
 fig = plt.figure(figsize=(15., 8.))
