@@ -8,7 +8,6 @@ Created on Tue Jun 16 15:21:25 2020
 
 import matplotlib.pyplot as plt
 import numpy as np
-from scipy import stats
 from netCDF4 import Dataset, num2date, MFDataset
 from datetime import datetime
 from matplotlib.dates import YearLocator, MonthLocator, DateFormatter
@@ -25,7 +24,6 @@ conda_dir = conda_file_dir.split('lib')[0]
 proj_lib = os.path.join(os.path.join(conda_dir, 'share'), 'proj')
 os.environ["PROJ_LIB"] = proj_lib
 
-from mpl_toolkits.basemap import Basemap
 import pyart
 
 
