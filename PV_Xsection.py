@@ -77,14 +77,6 @@ lon2 = grid_output[5]
 level = nc.variables['level'][:]*100
 level_mb = level/100
 
-time = nc.variables['time'][:]
-timeUnits = nc.variables['time'].units
-tmpDates = num2date(time,timeUnits,calendar='gregorian')
-era['date'] = np.asarray([datetime(d.year,d.month,d.day) for d in tmpDates])
-era['day'] = np.asarray([d.day for d in era['date']])
-era['month'] = np.asarray([d.month for d in era['date']])
-era['year'] = np.asarray([d.year for d in era['date']])
-
 
 pv = nc.variables['pv'][:,:,ilat,ilon]
 temp = nc.variables['t'][:,:,ilat,ilon]
