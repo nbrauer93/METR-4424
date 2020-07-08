@@ -6,7 +6,8 @@ Created on Wed Jul  8 12:24:51 2020
 @author: noahbrauer
 """
 r"""
-This script uses ERA-5 renalaysis data to plot relative vorticity, geopotential height, and wind at 500 mb. 
+This script uses ERA-5 renalaysis data to plot relative vorticity, geopotential height, and wind at 500 mb. When selecting data, you will need to choose a level,
+geopotential height, u-wind, v-wind, and relative vorticity. 
 """
 
 
@@ -58,13 +59,14 @@ lat2,lon2 = np.meshgrid(latitude,longitude)
 relative_vort[relative_vort<=0] = np.nan
 
 
-def plot_500_vort(lon_min,lon_max,lat_min,lat_max,title_font_size,declutter = None):
+def plot_500_vort(time,lon_min,lon_max,lat_min,lat_max,title_font_size,declutter = None):
     
     r"""
     This function plots relative vorticity, gepotential height, and wind (knots) on a grid.
     
     Parameters:
     -----------
+    time(int): Time index for the time being plotted
     lon_min,lon_max(float): Minimum and maximum longitude of the grid domain
     lat_min,lat_max(float): Minimum and maximum latitude of the grid domain
     title_font_size(float): Font size of the title and colorbar label
@@ -88,10 +90,10 @@ def plot_500_vort(lon_min,lon_max,lat_min,lat_max,title_font_size,declutter = No
 
     m = Basemap(projection='cyl',lon_0=np.mean(xlim),lat_0=np.mean(ylim),llcrnrlat=ylim[0],urcrnrlat=ylim[1],llcrnrlon=xlim[0],urcrnrlon=xlim[1],resolution='i')
     m.drawcoastlines(); m.drawstates(), m.drawcountries()  
-    cs = m.contourf(lon2,lat2,relative_vort[0,:,:].T,clevs,cmap='YlOrRd',extend='both') 
-    cs2 = m.contour(lon2,lat2,z[0,:,:].T, colors = 'k')
+    cs = m.contourf(lon2,lat2,relative_vort[time,:,:].T,clevs,cmap='YlOrRd',extend='both') 
+    cs2 = m.contour(lon2,lat2,z[time,:,:].T, colors = 'k')
     plt.clabel(cs2, fontsize=10, inline=1,fmt = '%1.0f')
-    plt.barbs(lon2[::declutter,::declutter],lat2[::declutter,::declutter],u[0,::declutter,::declutter].T,v[0,::declutter,::declutter].T)
+    plt.barbs(lon2[::declutter,::declutter],lat2[::declutter,::declutter],u[time,::declutter,::declutter].T,v[time,::declutter,::declutter].T)
     m.drawcounties()
 
     cbar = m.colorbar(cs,size='2%')
@@ -104,4 +106,4 @@ def plot_500_vort(lon_min,lon_max,lat_min,lat_max,title_font_size,declutter = No
 
 
 
-plot_vort = plot_500_vort(-120,-75,20,65,20)
+plot_vort = plot_500_vort(0,-120,-75,20,65,20)
