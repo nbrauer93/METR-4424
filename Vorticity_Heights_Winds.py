@@ -5,6 +5,12 @@ Created on Wed Jul  8 12:24:51 2020
 
 @author: noahbrauer
 """
+r"""
+This script uses ERA-5 renalaysis data to plot relative vorticity, geopotential height, and wind at 500 mb. 
+"""
+
+
+
 #Import all libraries 
 
 import matplotlib.pyplot as plt
@@ -43,18 +49,6 @@ z = nc.variables['z'][:]/100 #Convert to decameters
 u = nc.variables['u'][:]*1.94384 #Convert from m/s to knots
 v = nc.variables['v'][:]*1.94384 #Convert fromn m/s to knots
 
-#Calculate the magnitude of the wind
-
-def wind_magnitude(u,v):
-    
-    magnitude = np.sqrt((u**2)+(v**2))
-    
-    return magnitude
-
-
-wind_magnitude = wind_magnitude(u,v)
-
-
 
 #Create a grid for plotting
 lat2,lon2 = np.meshgrid(latitude,longitude)
@@ -64,10 +58,19 @@ lat2,lon2 = np.meshgrid(latitude,longitude)
 relative_vort[relative_vort<=0] = np.nan
 
 
-
-
 def plot_500_vort(lon_min,lon_max,lat_min,lat_max,title_font_size,declutter = None):
-
+    
+    r"""
+    This function plots relative vorticity, gepotential height, and wind (knots) on a grid.
+    
+    Parameters:
+    -----------
+    lon_min,lon_max(float): Minimum and maximum longitude of the grid domain
+    lat_min,lat_max(float): Minimum and maximum latitude of the grid domain
+    title_font_size(float): Font size of the title and colorbar label
+    declutter(int): Sets the declutter rate of the wind barbs; Greater number means lower barb density
+    
+    """
 
 
     if declutter is None:
