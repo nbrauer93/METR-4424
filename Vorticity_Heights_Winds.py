@@ -70,7 +70,7 @@ def plot_500_vort(time,lon_min,lon_max,lat_min,lat_max,title_font_size,declutter
     lon_min,lon_max(float): Minimum and maximum longitude of the grid domain
     lat_min,lat_max(float): Minimum and maximum latitude of the grid domain
     title_font_size(float): Font size of the title and colorbar label
-    declutter(int): Sets the declutter rate of the wind barbs; Greater number means lower barb density
+    declutter(int): Sets the declutter rate of the wind barbs; Greater number means lower barb density; Default is 12
     
     """
 
