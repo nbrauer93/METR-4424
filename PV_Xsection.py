@@ -141,8 +141,8 @@ def plot_xsect(latitude_index, latitude_value, time, label_size, title_size, sig
     
 
 
-    theta_bill = theta[:,:,latitude_index,:]
-    pv_bill = pv[:,:,latitude_index,:]*10**6
+    theta_lat = theta[:,:,latitude_index,:]
+    pv_lat = pv[:,:,latitude_index,:]*10**6
 
 
    
@@ -150,7 +150,7 @@ def plot_xsect(latitude_index, latitude_value, time, label_size, title_size, sig
     if sigma_value is None:
         sigma = 1.25
         
-    theta_smooth = gaussian_filter(theta_bill, sigma)
+    theta_smooth = gaussian_filter(theta_lat, sigma)
 
 
 #Define a time index (in 3hr increments starting at 00 UTC 6/19/2015)
@@ -162,8 +162,8 @@ def plot_xsect(latitude_index, latitude_value, time, label_size, title_size, sig
 
     plt.ylim(level_mb[36],level_mb[11])
     clevs = np.arange(0,10,0.5)
-    plt.contour(longitude,level_mb,pv_bill[time,:,:],clevs,colors = 'black')
-    cp = plt.contourf(longitude, level_mb,pv_bill[time,:,:],clevs, cmap = 'pyart_NWSRef')
+    plt.contour(longitude,level_mb,pv_lat[time,:,:],clevs,colors = 'black')
+    cp = plt.contourf(longitude, level_mb,pv_lat[time,:,:],clevs, cmap = 'pyart_NWSRef')
     clevs2 = np.arange(210,370,10)
     plt.contour(longitude,level_mb,theta_smooth[time,:,:],colors = 'red',linewidths = 2)
     cs = plt.contour(longitude,level_mb,theta_smooth[time,:,:], clevs2,colors = 'red',linewidths = 2)
