@@ -11,8 +11,6 @@ import numpy as np
 from datetime import datetime
 from matplotlib.dates import YearLocator, MonthLocator, DateFormatter
 from matplotlib.ticker import MultipleLocator
-import glob
-
 
 
 import os
