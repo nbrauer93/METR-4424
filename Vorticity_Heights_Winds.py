@@ -97,7 +97,7 @@ def plot_500_vort(time,lon_min,lon_max,lat_min,lat_max,title_font_size,declutter
     m.drawcounties()
 
     cbar = m.colorbar(cs,size='2%')
-    cbar.ax.set_ylabel(r'[$10^{5}$ $s^{-1}$]',size=title_font_size)
+    cbar.ax.set_ylabel(r'[$10^{-5}$ $s^{-1}$]',size=title_font_size)
     plt.title(str(title_name) + str(time),name='Calibri',size=title_font_size)
     
     plot = plt.show(block=False) 
