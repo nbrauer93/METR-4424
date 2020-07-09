@@ -1,3 +1,9 @@
+r"""
+This script uses ERA-5 renalaysis data to plot relative vorticity, geopotential height, and wind at 500 mb. When selecting data, you will need to choose a level,
+geopotential height, u-wind, v-wind, and relative vorticity. 
+"""
+
+
 import matplotlib.pyplot as plt
 from netCDF4 import Dataset, num2date, MFDataset
 import netCDF4 as nc
@@ -61,9 +67,22 @@ wind_magnitude[wind_magnitude<30] = np.nan
 
 
 
-def plot_500_wind(lon_min,lon_max,lat_min,lat_max,min_value, max_value, value_interval, title_font_size,declutter = None):
+def plot_500_wind(time,lon_min,lon_max,lat_min,lat_max,min_value, max_value, value_interval, title_font_size,declutter = None):
 
-
+    r"""
+    This function plots isotachs, gepotential height, and wind barbs (knots) on a grid.
+    
+    Parameters:
+    -----------
+    time(int): Time index for the time being plotted
+    lon_min,lon_max(float): Minimum and maximum longitude of the grid domain
+    lat_min,lat_max(float): Minimum and maximum latitude of the grid domain
+    min_value,max_value(float): Minimum and Maximum values for the isotachs
+    value_interval(float): Interval for isotachs
+    title_font_size(float): Font size of the title and colorbar label
+    declutter(int): Sets the declutter rate of the wind barbs; Greater number means lower barb density; Default is 12
+    
+    """
 
     if declutter is None:
         declutter = 12
@@ -80,11 +99,10 @@ def plot_500_wind(lon_min,lon_max,lat_min,lat_max,min_value, max_value, value_in
 
     m = Basemap(projection='cyl',lon_0=np.mean(xlim),lat_0=np.mean(ylim),llcrnrlat=ylim[0],urcrnrlat=ylim[1],llcrnrlon=xlim[0],urcrnrlon=xlim[1],resolution='i')
     m.drawcoastlines(); m.drawstates(), m.drawcountries()  
-    #cs = m.contourf(lon2,lat2,relative_vort[0,:,:].T,clevs,cmap='YlOrRd',extend='both') 
-    cs = m.contourf(lon2,lat2,wind_magnitude[0,:,:].T, clevs, cmap = 'BuPu')
-    cs2 = m.contour(lon2,lat2,z[0,:,:].T, colors = 'k')
+    cs = m.contourf(lon2,lat2,wind_magnitude[time,:,:].T, clevs, cmap = 'BuPu')
+    cs2 = m.contour(lon2,lat2,z[time,:,:].T, colors = 'k')
     plt.clabel(cs2, fontsize=10, inline=1,fmt = '%1.0f')
-    plt.barbs(lon2[::declutter,::declutter],lat2[::declutter,::declutter],u[0,::declutter,::declutter].T,v[0,::declutter,::declutter].T)
+    plt.barbs(lon2[::declutter,::declutter],lat2[::declutter,::declutter],u[time,::declutter,::declutter].T,v[time,::declutter,::declutter].T)
     m.drawcounties()
 
     cbar = m.colorbar(cs,size='2%')
@@ -97,4 +115,4 @@ def plot_500_wind(lon_min,lon_max,lat_min,lat_max,min_value, max_value, value_in
 
 
 
-plot_wind = plot_500_wind(-120,-75,20,65,30,120, 10, 20)
+plot_wind = plot_500_wind(0,-120,-75,20,65,30,120, 10, 20)
