@@ -46,7 +46,6 @@ nc = Dataset(file ,'r')
 
 latitude = nc.variables['latitude'][:]
 longitude = nc.variables['longitude'][:]
-z = nc.variables['z'][:]/100 #Convert to decameters
 u = nc.variables['u'][:]*1.94384 #Convert from m/s to knots
 v = nc.variables['v'][:]*1.94384 #Convert fromn m/s to knots
 
@@ -74,7 +73,7 @@ wind_magnitude[wind_magnitude<50] = np.nan
 
 #%%
 
-def plot_streamlines(lon_min,lon_max,lat_min,lat_max,min_value, max_value, value_interval, title_font_size,density,declutter = None):
+def plot_streamlines(time,lon_min,lon_max,lat_min,lat_max,min_value, max_value, value_interval, title_font_size,density,declutter = None):
 
 
 
@@ -93,9 +92,8 @@ def plot_streamlines(lon_min,lon_max,lat_min,lat_max,min_value, max_value, value
 
     m = Basemap(projection='cyl',lon_0=np.mean(xlim),lat_0=np.mean(ylim),llcrnrlat=ylim[0],urcrnrlat=ylim[1],llcrnrlon=xlim[0],urcrnrlon=xlim[1],resolution='i')
     m.drawcoastlines(); m.drawstates(), m.drawcountries()  
-    #cs = m.contourf(lon2,lat2,relative_vort[0,:,:].T,clevs,cmap='YlOrRd',extend='both') 
-    cs = m.contourf(lon2,lat2,wind_magnitude[0,:,:].T, clevs, cmap = 'BuPu')
-    cs2 = plt.streamplot(longitude,latitude,u[0,:,:].T,v[0,:,:].T, density = density, linewidth = 2, color = 'k')
+    cs = m.contourf(lon2,lat2,wind_magnitude[time,:,:].T, clevs, cmap = 'BuPu')
+    cs2 = plt.streamplot(longitude,latitude,u[time,:,:].T,v[time,:,:].T, density = density, linewidth = 2, color = 'k')
     
     m.drawcounties()
 
@@ -109,4 +107,4 @@ def plot_streamlines(lon_min,lon_max,lat_min,lat_max,min_value, max_value, value
 
 
 
-plot_wind = plot_streamlines(-120,-75,20,65,50,180, 10, 20,3)
+plot_wind = plot_streamlines(0,-120,-75,20,65,50,180, 10, 20,3)
