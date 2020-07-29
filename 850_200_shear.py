@@ -99,9 +99,8 @@ def plot_streamlines(lon_min,lon_max,lat_min,lat_max,min_value, max_value, value
     xlim = np.array([lon_min,lon_max]); ylim = np.array([lat_min,lat_max])
 
     m = Basemap(projection='cyl',lon_0=np.mean(xlim),lat_0=np.mean(ylim),llcrnrlat=ylim[0],urcrnrlat=ylim[1],llcrnrlon=xlim[0],urcrnrlon=xlim[1],resolution='i')
-    m.drawcoastlines(); m.drawstates(), m.drawcountries()  
-    #cs = m.contourf(lon2,lat2,relative_vort[0,:,:].T,clevs,cmap='YlOrRd',extend='both') 
-    cs = m.contourf(lon2,lat2,shear_mag.T, clevs, cmap = 'YlOrRd')
+    m.drawcoastlines(); m.drawstates(), m.drawcountries() 
+    cs = m.contourf(lon2,lat2,shear_mag.T, clevs, cmap = 'YlOrRd', extend = 'max')
     cs2 = plt.streamplot(longitude,latitude,u_200,v_200, density = density, linewidth = 2, color = 'k')
     
     m.drawcounties()
